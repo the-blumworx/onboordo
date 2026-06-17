@@ -1,12 +1,12 @@
 # Onboordo
 
-Onboordo is an open-source library for building seamless, dynamic user onboarding flows in web applications. Built with Angular and NestJS, it provides a comprehensive toolset to welcome and guide users through your application.
+Onboordo is an open-source, full software suite for creating, managing, and analyzing dynamic user onboarding flows. Onboordo empowers product teams to build interactive product tours, checklists, and surveys—all from a centralized dashboard. Built on a modern Angular and NestJS stack.
 
 ## Features
 
-- **Seamless Integration**: Easily plug into any Angular web application.
-- **Robust Backend Support**: Powered by NestJS for managing onboarding states and tracking user progress.
-- **Customizable**: Create custom steps, interactive product tours, and informative tooltips.
+- **No-Code Flow Builder**: Visually design and manage complex onboarding tours and tooltips without writing code.
+- **Robust Analytics & Tracking**: Powered by NestJS to securely manage user states, track progress, and segment your audience.
+- **Seamless Integration**: Easily drop the Onboordo client into your web application to start serving your published flows.
 
 ## Prerequisites
 
