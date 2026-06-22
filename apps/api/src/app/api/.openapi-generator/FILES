@@ -1,0 +1,16 @@
+.gitignore
+.openapi-generator-ignore
+README.md
+api.module.ts
+api/api.ts
+api/system.service.ts
+configuration.ts
+git_push.sh
+index.ts
+model/errorResponse.ts
+model/errorResponseMessage.ts
+model/models.ts
+model/setupRequest.ts
+model/setupStatusResponse.ts
+model/setupSuccessResponse.ts
+variables.ts

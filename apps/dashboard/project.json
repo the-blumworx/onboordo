@@ -87,6 +87,12 @@
         "staticFilePath": "dist/apps/dashboard/browser",
         "spa": true
       }
+    },
+    "generate-api": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "openapi-generator-cli generate -i apps/api/openapi.yaml -g typescript-angular -o apps/dashboard/src/app/api"
+      }
     }
   }
 }
