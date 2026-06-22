@@ -8,7 +8,9 @@
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/dashboard",
@@ -20,7 +22,10 @@
             "input": "apps/dashboard/public"
           }
         ],
-        "styles": ["apps/dashboard/src/styles.css"]
+        "styles": [
+          "apps/dashboard/src/material-theme.scss",
+          "apps/dashboard/src/styles.css"
+        ]
       },
       "configurations": {
         "production": {
@@ -49,6 +54,12 @@
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "defaultConfiguration": "development",
+      "dependsOn": [
+        "api:serve"
+      ],
+      "options": {
+        "proxyConfig": "apps/dashboard/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "dashboard:build:production"
@@ -56,10 +67,6 @@
         "development": {
           "buildTarget": "dashboard:build:development"
         }
-      },
-      "dependsOn": ["api:serve"],
-      "options": {
-        "proxyConfig": "apps/dashboard/proxy.conf.json"
       }
     },
     "lint": {
