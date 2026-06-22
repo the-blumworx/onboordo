@@ -26,7 +26,7 @@ import { COLLECTION_FORMATS } from '../variables';
 @Injectable()
 export class SystemService {
 
-    protected basePath = '/api';
+    protected basePath = '/api/v1';
     public defaultHeaders: Record<string,string> = {};
     public configuration = new Configuration();
     protected httpClient: HttpService;
