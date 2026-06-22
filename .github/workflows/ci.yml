@@ -8,12 +8,14 @@ on:
 
 jobs:
   validation:
-    name: Code Style Validation
+    name: Validation, Test, and Build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -21,14 +23,32 @@ jobs:
           node-version: 22
           cache: 'npm'
 
+      - name: Cache Nx
+        uses: actions/cache@v4
+        with:
+          path: .nx/cache
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-nx-
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Set Nx SHAs
+        uses: nrwl/nx-set-shas@v4
 
       - name: Run Prettier formatting check
         run: npm run format:check
 
-      - name: Run ESLint
-        run: npm run lint
+      - name: Run Nx Affected Lint
+        run: npx nx affected -t lint
+
+      - name: Run Nx Affected Test
+        run: npx nx affected -t test
+
+      - name: Run Nx Affected Build
+        run: npx nx affected -t build
 
   release:
     name: Release
@@ -52,8 +72,20 @@ jobs:
           node-version: 22
           cache: 'npm'
 
+      - name: Cache Nx
+        uses: actions/cache@v4
+        with:
+          path: .nx/cache
+          key: ${{ runner.os }}-nx-${{ hashFiles('**/package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-nx-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-nx-
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Build all for release
+        run: npx nx run-many -t build
 
       - name: Run Semantic Release
         env:
