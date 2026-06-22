@@ -2,7 +2,11 @@
   "name": "@onboordo/source",
   "version": "0.1.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "lint": "nx run-many --target=lint --all",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "~21.2.0",

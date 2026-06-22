@@ -8,9 +8,7 @@
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/dashboard",
@@ -54,9 +52,7 @@
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "defaultConfiguration": "development",
-      "dependsOn": [
-        "api:serve"
-      ],
+      "dependsOn": ["api:serve"],
       "options": {
         "proxyConfig": "apps/dashboard/proxy.conf.json"
       },

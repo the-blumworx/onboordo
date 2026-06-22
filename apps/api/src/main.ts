@@ -14,17 +14,22 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  
+
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
   });
 
   try {
-    const document = yaml.load(join(process.cwd(), 'apps', 'api', 'openapi.yaml'));
+    const document = yaml.load(
+      join(process.cwd(), 'apps', 'api', 'openapi.yaml'),
+    );
     SwaggerModule.setup('docs', app, document);
   } catch (error) {
-    Logger.warn('Failed to load openapi.yaml. Documentation will not be served.', 'Bootstrap');
+    Logger.warn(
+      'Failed to load openapi.yaml. Documentation will not be served.',
+      'Bootstrap',
+    );
   }
 
   const port = process.env.PORT || 3000;
