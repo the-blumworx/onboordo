@@ -5,7 +5,8 @@
   "scripts": {
     "lint": "nx run-many --target=lint --all",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -61,7 +62,9 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^1.6.2",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^17.0.8",
     "nx": "23.0.0",
     "prettier": "~3.6.2",
     "swc-loader": "^0.2.7",
@@ -74,5 +77,8 @@
     "webpack": "^5.101.3",
     "webpack-cli": "^7.0.0",
     "webpack-dev-server": "^5.2.1"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
   }
 }
