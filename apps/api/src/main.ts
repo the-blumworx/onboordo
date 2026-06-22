@@ -21,25 +21,16 @@ async function bootstrap() {
   });
 
   try {
-    const document = yaml.load(
-      join(process.cwd(), 'apps', 'api', 'openapi.yaml'),
-    );
+    const document = yaml.load(join(process.cwd(), 'apps', 'api', 'openapi.yaml'));
     SwaggerModule.setup('docs', app, document);
   } catch (error) {
-    Logger.warn(
-      'Failed to load openapi.yaml. Documentation will not be served.',
-      'Bootstrap',
-    );
+    Logger.warn('Failed to load openapi.yaml. Documentation will not be served.', 'Bootstrap');
   }
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
-  );
-  Logger.log(
-    `📖 OpenAPI Documentation is running on: http://localhost:${port}/docs`,
-  );
+  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
+  Logger.log(`📖 OpenAPI Documentation is running on: http://localhost:${port}/docs`);
 }
 
 bootstrap();

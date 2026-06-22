@@ -5,12 +5,7 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: [
-      '**/dist',
-      '**/out-tsc',
-      'apps/api/src/app/api/**',
-      'apps/dashboard/src/app/api/**'
-    ],
+    ignores: ['**/dist', '**/out-tsc', 'apps/api/src/app/api/**', 'apps/dashboard/src/app/api/**'],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

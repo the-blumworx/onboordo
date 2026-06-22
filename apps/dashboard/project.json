@@ -20,10 +20,7 @@
             "input": "apps/dashboard/public"
           }
         ],
-        "styles": [
-          "apps/dashboard/src/material-theme.scss",
-          "apps/dashboard/src/styles.css"
-        ]
+        "styles": ["apps/dashboard/src/material-theme.scss", "apps/dashboard/src/styles.css"]
       },
       "configurations": {
         "production": {
