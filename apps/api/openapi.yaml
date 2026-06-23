@@ -3,6 +3,9 @@ info:
   title: Onboordo API
   description: API for Onboordo, including first-run setup flow.
   version: 0.1.0
+  license:
+    name: MIT
+    url: https://github.com/the-blumworx/onboordo/blob/main/LICENSE
 servers:
   - url: /api/v1
     description: Main API server
