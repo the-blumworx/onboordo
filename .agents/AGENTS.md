@@ -6,7 +6,7 @@ Before writing any code, read the Architecture Decision Records in `docs/adr/`. 
 
 Key decisions that affect daily coding:
 
-- **Multi-tenancy (ADR-001):** All tenant-scoped data must be filtered by workspace. Even though OSS is single-tenant, the schema is workspace-scoped.
+- **Multi-tenancy (ADR-001):** All tenant-scoped data must be filtered by workspace. The schema is workspace-scoped from day one.
 - **Auth (ADR-003):** JWT access + refresh tokens. Email/password with bcrypt. RBAC with Admin, Editor, Viewer roles. API keys (hashed) for SDK auth.
 - **API design (ADR-013):** Contract-first. The OpenAPI spec (`apps/api/openapi.yaml`) is the source of truth. Change the spec first, then generate code. Never hand-edit generated client/server code.
 - **Real-time (ADR-004):** SSE for server→client push. REST for client→server. No WebSocket.
