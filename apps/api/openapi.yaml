@@ -1,0 +1,129 @@
+openapi: 3.1.1
+info:
+  title: Onboordo API
+  description: API for Onboordo, including first-run setup flow.
+  version: 0.1.0
+  license:
+    name: MIT
+    url: https://github.com/the-blumworx/onboordo/blob/main/LICENSE
+servers:
+  - url: /api/v1
+    description: Main API server
+tags:
+  - name: System
+    description: System-level operations and status
+paths:
+  /system/setup-status:
+    get:
+      summary: Check if the system requires first-run setup
+      description: Returns whether the initial workspace, admin user, and default API key have been created.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Setup status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupStatusResponse'
+
+  /system/setup:
+    post:
+      summary: Initialize the system
+      description: Creates the initial workspace, admin user, and default API key. This endpoint is only available if the system has not been set up yet.
+      tags:
+        - System
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetupRequest'
+      responses:
+        '201':
+          description: System initialized successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupSuccessResponse'
+        '400':
+          description: Validation failed for setup payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: System is already set up
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    SetupStatusResponse:
+      type: object
+      required:
+        - needsSetup
+      properties:
+        needsSetup:
+          type: boolean
+          description: True if the system requires first-run initialization.
+          example: true
+
+    SetupRequest:
+      type: object
+      required:
+        - email
+        - password
+        - workspaceName
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email address for the initial admin user.
+          example: admin@example.com
+        password:
+          type: string
+          minLength: 8
+          description: The password for the initial admin user. Must be at least 8 characters.
+          example: securepassword123
+        workspaceName:
+          type: string
+          minLength: 3
+          description: The name of the initial workspace. Must be at least 3 characters.
+          example: My Company
+
+    SetupSuccessResponse:
+      type: object
+      required:
+        - apiKey
+      properties:
+        apiKey:
+          type: string
+          description: The newly generated default API key.
+          example: sk_test_1234567890abcdef
+
+    ErrorResponse:
+      type: object
+      required:
+        - statusCode
+        - message
+        - error
+      properties:
+        statusCode:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: Detailed error message or array of validation errors
+          example: ['password must be longer than or equal to 8 characters']
+        error:
+          type: string
+          description: Short error type
+          example: Bad Request

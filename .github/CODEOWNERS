@@ -1,0 +1,13 @@
+# Global owners
+* @maintainer
+
+# Backend / API
+/apps/api/ @backend-team
+/prisma/ @backend-team
+
+# Frontend / Dashboard
+/apps/dashboard/ @frontend-team
+
+# SDK & Extension
+/libs/sdk/ @frontend-team
+/apps/extension/ @frontend-team
